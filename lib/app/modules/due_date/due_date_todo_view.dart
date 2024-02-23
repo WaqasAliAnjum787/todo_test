@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:todo/app/controllers/todo_controller.dart';
+import 'package:todo/app/data/data/app_assets.dart';
 import 'package:todo/app/models/todo_model.dart';
 import 'package:todo/app/modules/home/components/list_item.dart';
 
@@ -21,7 +22,7 @@ class DueDateView extends StatelessWidget {
                 width: 250.h,
                 decoration: BoxDecoration(shape: BoxShape.circle),
                 child: Lottie.asset(
-                  'assets/animations/no_data_found_animation.json',
+                  AppAssets.noDataAnimation,
                   fit: BoxFit.fill,
                 ),
               ),

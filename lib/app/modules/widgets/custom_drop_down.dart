@@ -7,6 +7,7 @@ class CustomDropDown extends StatefulWidget {
   final String hint;
   final Function(String?)? onChanged;
   final String? value;
+  final String? Function(String?)? validator;
 
   const CustomDropDown({
     Key? key,
@@ -14,6 +15,7 @@ class CustomDropDown extends StatefulWidget {
     required this.hint,
     this.onChanged,
     this.value,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -26,6 +28,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
+      validator: widget.validator,
       icon: const Icon(Icons.arrow_drop_down_circle, color: AppColors.kGrey2),
       items: widget.items
           .map((e) =>

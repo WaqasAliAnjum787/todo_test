@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:board_datetime_picker/board_datetime_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:todo/app/controllers/todo_controller.dart';
 import 'package:todo/app/data/data/app_constents.dart';
+import 'package:todo/app/data/data/app_typography.dart';
 import 'package:todo/app/models/todo_model.dart';
 import 'package:todo/app/modules/widgets/custom_drop_down.dart';
 import 'package:todo/app/modules/widgets/image_picker_container.dart';
@@ -45,6 +49,8 @@ class _AddOrUpdateTodoState extends State<AddOrUpdateTodo> {
           .toString()
           .substring(0, 10);
     }
+    difficultiLevel.text = DifficulityLevel.values[0].name;
+    priority.text = Priority.values[0].name;
     super.initState();
   }
 
@@ -85,6 +91,13 @@ class _AddOrUpdateTodoState extends State<AddOrUpdateTodo> {
                       }),
                 ),
                 Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Enter Title:',
+                    style: AppTypography.kBold14,
+                  ),
+                ),
+                Padding(
                   padding:
                       const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   child: TextFormField(
@@ -97,6 +110,13 @@ class _AddOrUpdateTodoState extends State<AddOrUpdateTodo> {
                       }
                       return null;
                     },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Discription:',
+                    style: AppTypography.kBold14,
                   ),
                 ),
                 Padding(
@@ -115,6 +135,13 @@ class _AddOrUpdateTodoState extends State<AddOrUpdateTodo> {
                       }
                       return null;
                     },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Select Due Date:',
+                    style: AppTypography.kBold14,
                   ),
                 ),
                 Padding(
@@ -147,9 +174,22 @@ class _AddOrUpdateTodoState extends State<AddOrUpdateTodo> {
                   ),
                 ),
                 Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Select Difficulity Level of task:',
+                    style: AppTypography.kBold14,
+                  ),
+                ),
+                Padding(
                   padding:
                       const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   child: CustomDropDown(
+                    validator: (p0) {
+                      if (p0 == null || p0.isEmpty) {
+                        return 'Please enter difficulity level of task';
+                      }
+                      return null;
+                    },
                     value: widget.isInEditMode == true
                         ? widget.todo!.difficulityLevel
                         : null,
@@ -161,9 +201,22 @@ class _AddOrUpdateTodoState extends State<AddOrUpdateTodo> {
                   ),
                 ),
                 Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Select Priority level of task:',
+                    style: AppTypography.kBold14,
+                  ),
+                ),
+                Padding(
                   padding:
                       const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   child: CustomDropDown(
+                    validator: (p0) {
+                      if (p0 == null || p0.isEmpty) {
+                        return 'Please enter priority level of task';
+                      }
+                      return null;
+                    },
                     value: widget.isInEditMode == true
                         ? widget.todo!.priority
                         : null,
@@ -174,10 +227,14 @@ class _AddOrUpdateTodoState extends State<AddOrUpdateTodo> {
                     },
                   ),
                 ),
+                SizedBox(height: 60.h),
                 Row(
                   children: [
                     Expanded(
-                      child: addOrUpdateButton(),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                        child: addOrUpdateButton(),
+                      ),
                     ),
                   ],
                 ),
