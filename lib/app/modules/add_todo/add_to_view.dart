@@ -278,7 +278,14 @@ class _AddOrUpdateTodoState extends State<AddOrUpdateTodo> {
                     dueDate: date!.millisecondsSinceEpoch),
                 file,
               );
-              Get.snackbar("Task Created", "Task Created Successfully");
+
+              setState(() {
+                title.clear();
+                dicription.clear();
+                priority.clear();
+                dueDate.clear();
+                difficultiLevel.clear();
+              });
             }
           }
         },

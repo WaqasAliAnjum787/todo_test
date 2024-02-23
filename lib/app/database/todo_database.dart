@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:get/get.dart';
 import 'package:todo/app/models/todo_model.dart';
 import 'package:todo/app/modules/widgets/loading_dialogs.dart';
 import 'package:todo/app/services/database_service.dart';
@@ -35,6 +36,7 @@ class TodoDatabase {
 
       todo.creationData = DateTime.now().millisecondsSinceEpoch;
       await db.todoCollection.doc(doc.id).set(todo.toMap());
+      Get.snackbar("Task Created", "Task Created Successfully");
       LoadingDialog.hideLoadingDialog();
     }
   }
