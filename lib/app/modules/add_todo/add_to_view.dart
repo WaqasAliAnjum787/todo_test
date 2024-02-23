@@ -1,6 +1,6 @@
 import 'package:board_datetime_picker/board_datetime_picker.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:todo/app/controllers/todo_controller.dart';
 import 'package:todo/app/data/data/app_constents.dart';
@@ -40,9 +40,10 @@ class _AddOrUpdateTodoState extends State<AddOrUpdateTodo> {
       title.text = widget.todo!.title;
       dicription.text = widget.todo!.description;
       priority.text = widget.todo!.priority;
-      time.text = dateAndTimeService
+      dueDate.text = dateAndTimeService
           .convertToDateTime(widget.todo!.dueDate!)
-          .toString();
+          .toString()
+          .substring(0, 10);
     }
     super.initState();
   }
@@ -149,6 +150,9 @@ class _AddOrUpdateTodoState extends State<AddOrUpdateTodo> {
                   padding:
                       const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   child: CustomDropDown(
+                    value: widget.isInEditMode == true
+                        ? widget.todo!.difficulityLevel
+                        : null,
                     items: DifficulityLevel.values.map((e) => e.name).toList(),
                     hint: "Select Difficulity level of task",
                     onChanged: (p0) {
@@ -160,8 +164,11 @@ class _AddOrUpdateTodoState extends State<AddOrUpdateTodo> {
                   padding:
                       const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   child: CustomDropDown(
+                    value: widget.isInEditMode == true
+                        ? widget.todo!.priority
+                        : null,
                     items: Priority.values.map((e) => e.name).toList(),
-                    hint: "Select Difficulity level of task",
+                    hint: "Select Priority level of task",
                     onChanged: (p0) {
                       priority.text = p0 ?? '';
                     },
@@ -199,6 +206,7 @@ class _AddOrUpdateTodoState extends State<AddOrUpdateTodo> {
                       status: '',
                       dueDate: date!.millisecondsSinceEpoch),
                   file);
+              Get.snackbar("Task Updated", "Task Updated Successfully");
             } else {
               todoController.addTodo(
                 TodoModel(
@@ -213,6 +221,7 @@ class _AddOrUpdateTodoState extends State<AddOrUpdateTodo> {
                     dueDate: date!.millisecondsSinceEpoch),
                 file,
               );
+              Get.snackbar("Task Created", "Task Created Successfully");
             }
           }
         },

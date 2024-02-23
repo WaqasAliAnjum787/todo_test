@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:todo/app/controllers/todo_controller.dart';
-import 'package:todo/app/models/todo_model.dart';
-import 'package:todo/app/modules/home/components/list_item.dart';
+import 'package:todo/app/modules/due_date/complete_view.dart';
+import 'package:todo/app/modules/due_date/due_date_todo_view.dart';
 
-class DueDateView extends StatelessWidget {
-  const DueDateView({super.key});
+class ProgessView extends StatelessWidget {
+  const ProgessView({super.key});
 
   TodoController get todoController => Get.find<TodoController>();
 
@@ -26,60 +24,13 @@ class DueDateView extends StatelessWidget {
           ),
           bottom: TabBar(
             tabs: [
-              Tab(text: 'Due Date'),
               Tab(text: 'Completed'),
+              Tab(text: 'Due Date'),
             ],
           ),
         ),
         body: TabBarView(
-          children: [
-            Obx(
-              () => todoController.overDueTodos.value.length == 0
-                  ? Center(
-                      child: Container(
-                        height: 250.h,
-                        width: 250.h,
-                        decoration: BoxDecoration(shape: BoxShape.circle),
-                        child: Lottie.asset(
-                          'assets/animations/no_data_found_animation.json',
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    )
-                  : ListView.builder(
-                      itemCount: todoController.overDueTodos.value.length,
-                      itemBuilder: (context, int) {
-                        final TodoModel todo = todoController.todos.value[int];
-                        return ListItem(
-                          todo: todo,
-                        );
-                      },
-                    ),
-            ),
-            Obx(
-              () => todoController.completedTodos.value.length == 0
-                  ? Center(
-                      child: Container(
-                        height: 250.h,
-                        width: 250.h,
-                        decoration: BoxDecoration(shape: BoxShape.circle),
-                        child: Lottie.asset(
-                          'assets/animations/no_data_found_animation.json',
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    )
-                  : ListView.builder(
-                      itemCount: todoController.completedTodos.value.length,
-                      itemBuilder: (context, int) {
-                        final TodoModel todo = todoController.todos.value[int];
-                        return ListItem(
-                          todo: todo,
-                        );
-                      },
-                    ),
-            ),
-          ],
+          children: [CompleteTodoView(), DueDateView()],
         ),
       ),
     );

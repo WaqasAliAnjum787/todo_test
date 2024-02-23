@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_utils/get_utils.dart';
 import 'package:todo/app/controllers/todo_controller.dart';
 import 'package:todo/app/data/data/app_colors.dart';
 import 'package:todo/app/data/data/app_constents.dart';
@@ -16,7 +15,7 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.h,
+      height: 85.h,
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 16,
@@ -27,7 +26,7 @@ class ListItem extends StatelessWidget {
         left: 16,
       ),
       decoration: BoxDecoration(
-        color: Colors.blue.shade400,
+        color: Colors.grey[300],
         border: Border.all(
           color: Colors.white,
           width: 1.0,
@@ -52,8 +51,21 @@ class ListItem extends StatelessWidget {
                           fontSize: 18,
                           fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      getPriority(todo.priority).name.capitalizeFirst ?? '',
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.h),
+                      child: Text(
+                        'Priority:'
+                        '${getPriority(todo.priority).name.capitalizeFirst ?? ''}',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.h),
+                      child: Text(
+                        'Difficulity Level:'
+                        '${getDifficulityLevel(todo.difficulityLevel).name.capitalizeFirst ?? ''}',
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
                   ],
                 ),
@@ -70,20 +82,33 @@ class ListItem extends StatelessWidget {
                               isInEditMode: true,
                             ));
                       },
-                      icon: Icon(Icons.edit)),
+                      icon: Icon(
+                        Icons.edit,
+                        color: AppColors.kBackground,
+                      )),
                   IconButton(
                       onPressed: () {
                         todoController.deleteTodo(todo);
                       },
-                      icon: Icon(Icons.delete)),
+                      icon: Icon(
+                        Icons.delete,
+                        color: AppColors.kBackground,
+                      )),
                   InkWell(
                     onTap: () {
                       todoController.markAsCompleted(todo);
+                      Get.snackbar("Task Updated", "Task Updated Successfully");
                     },
                     child: Container(
                       child: todo.isCompleted
-                          ? Icon(Icons.check_circle_outline_rounded)
-                          : Icon(Icons.radio_button_unchecked_rounded),
+                          ? Icon(
+                              Icons.check_circle_outline_rounded,
+                              color: AppColors.kBackground,
+                            )
+                          : Icon(
+                              Icons.radio_button_unchecked_rounded,
+                              color: AppColors.kBackground,
+                            ),
                     ),
                   )
                 ],
@@ -93,52 +118,6 @@ class ListItem extends StatelessWidget {
           SizedBox(
             height: 2.h,
           ),
-          // Row(
-          //   children: [
-          // Container(
-          //   decoration: BoxDecoration(
-          //       color: AppColors.kOrange,
-          //       borderRadius: BorderRadius.all(Radius.circular(6))),
-          //   padding: EdgeInsets.all(
-          //     4,
-          //   ),
-          //   child: Text(
-          //     getPriority(todo.priority).name,
-          //   ),
-          // ),
-          //     Row(
-          //       children: List.generate(4, (index) {
-          //         if (getPriority(todo.priority) == Priority.low) {
-          //           return Container(
-          //             height: 10,
-          //             width: 20,
-          //             decoration: BoxDecoration(
-          //               color: index == 0 ? Colors.red.shade300 : Colors.grey,
-          //               borderRadius: BorderRadius.only(
-          //                 bottomLeft: Radius.circular(50),
-          //               ),
-          //             ),
-          //           );
-          //         } else {
-          //           if (getPriority(todo.priority) == Priority.medium) {
-          //             return Container(
-          //               color: index <= 1 ? Colors.red.shade500 : Colors.grey,
-          //             );
-          //           } else {
-          //             if (getPriority(todo.priority) == Priority.high) {
-          //               return Container(
-          //                 color: index <= 1 ? Colors.red.shade700 : Colors.grey,
-          //               );
-          //             }
-          //             return Container(
-          //               color: Colors.red,
-          //             );
-          //           }
-          //         }
-          //       }),
-          //     ),
-          //   ],
-          // ),
         ],
       ),
     );

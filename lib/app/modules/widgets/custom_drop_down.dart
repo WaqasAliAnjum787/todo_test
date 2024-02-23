@@ -6,12 +6,14 @@ class CustomDropDown extends StatefulWidget {
   final List<String> items;
   final String hint;
   final Function(String?)? onChanged;
+  final String? value;
 
   const CustomDropDown({
     Key? key,
     required this.items,
     required this.hint,
     this.onChanged,
+    this.value,
   }) : super(key: key);
 
   @override
@@ -30,7 +32,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
               DropdownMenuItem(child: Text(e.capitalizeFirst!), value: e))
           .toList(),
       hint: Text(widget.hint),
-      value: widget.items.first,
+      value: widget.value ?? widget.items.first,
       onChanged: (String? newValue) {
         setState(() {
           _value = newValue;

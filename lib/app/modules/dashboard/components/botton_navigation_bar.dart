@@ -63,13 +63,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           selectedColor: AppColors.kPrimary,
           unselectedColor: AppColors.kFilledColor,
         ),
-        DotNavigationBarItem(
-          icon: const Icon(
-            Icons.manage_accounts_outlined,
-          ),
-          selectedColor: AppColors.kPrimary,
-          unselectedColor: AppColors.kFilledColor,
-        ),
       ],
     );
   }

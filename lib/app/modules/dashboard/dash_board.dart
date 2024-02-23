@@ -5,7 +5,6 @@ import 'package:todo/app/modules/add_todo/add_to_view.dart';
 import 'package:todo/app/modules/dashboard/components/botton_navigation_bar.dart';
 import 'package:todo/app/modules/due_date/due_date_view.dart';
 import 'package:todo/app/modules/home/home_page.dart';
-import 'package:todo/app/modules/profile/profile_view.dart';
 import 'package:todo/app/modules/search/search_view.dart';
 
 class Dashboard extends StatefulWidget {
@@ -19,10 +18,9 @@ class _DashboardState extends State<Dashboard> {
 
   List<Widget> listOfPages = [
     HomePage(),
-    DueDateView(),
+    ProgessView(),
     SearchView(),
     AddOrUpdateTodo(),
-    UserProfilePage()
   ];
 
   int index = 0;

@@ -2,9 +2,10 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo/app/data/data/app_colors.dart';
 import 'package:todo/app/services/image_picker_service.dart';
 
-// ignore: must_be_immutables
+// ignore: must_be_immutables, must_be_immutable
 class ImagePickerContainer extends StatefulWidget {
   final Function(File) onImagePicked;
   String? imageUrl;
@@ -35,7 +36,7 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
             : _image == null
                 ? Container(
                     height: 100.h,
-                    color: Colors.grey,
+                    color: Colors.grey[300],
                     child: const Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -43,11 +44,11 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
                           Icon(
                             Icons.camera_alt,
                             size: 50,
-                            color: Colors.white,
+                            color: AppColors.kBackground,
                           ),
                           Text(
                             'Tap to pick an image',
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: AppColors.kBackground),
                           ),
                         ],
                       ),

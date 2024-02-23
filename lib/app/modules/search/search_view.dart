@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:todo/app/controllers/todo_controller.dart';
 import 'package:todo/app/models/todo_model.dart';
@@ -28,6 +29,7 @@ class _SearchViewState extends State<SearchView> {
         appBar: AppBar(title: Text('Search')),
         body: Column(
           children: [
+            SizedBox(height: 7.h),
             Padding(
               padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
               child: TextField(
